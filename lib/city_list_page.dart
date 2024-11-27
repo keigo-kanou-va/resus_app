@@ -7,36 +7,23 @@ class CityListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const cities = {'札幌市', '横浜市', '川崎市', '札幌市2', '横浜市2', '川崎市2'};
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('市区町村一覧'),
       ),
       body: ListView(
         children: [
-          ListTile(
-            title: const Text('札幌市'),
-            subtitle: const Text('政令指定都市'),
-            trailing: const Icon(Icons.navigate_next),
-            onTap: () {
-              //TODO:詳細画面に遷移する
-            },
-          ),
-          ListTile(
-            title: const Text('横浜市'),
-            subtitle: const Text('政令指定都市'),
-            trailing: const Icon(Icons.navigate_next),
-            onTap: () {
-              //TODO:詳細画面に遷移する
-            },
-          ),
-          ListTile(
-            title: const Text('川崎市'),
-            subtitle: const Text('政令指定都市'),
-            trailing: const Icon(Icons.navigate_next),
-            onTap: () {
-              //TODO:詳細画面に遷移する
-            },
-          )
+          for (final city in cities)
+            ListTile(
+              title: Text(city),
+              subtitle: const Text('政令指定都市'),
+              trailing: const Icon(Icons.navigate_next),
+              onTap: () {
+                //TODO:詳細画面に遷移する
+              },
+            )
         ],
       ),
     );
