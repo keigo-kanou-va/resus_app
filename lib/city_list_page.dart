@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:myapp/city_detail_page.dart';
 import 'package:http/http.dart' as http;
 import 'package:myapp/env.dart';
+import 'package:myapp/city.dart';
 
 class CityListPage extends StatefulWidget {
   const CityListPage({
@@ -50,20 +51,21 @@ class _CityListPageState extends State<CityListPage> {
             }
             final json = jsonDecode(snapshot.data!)['result'] as List;
             final items = json.cast<Map<String, dynamic>>();
+            final cities = items.map(City.fromJson).toList();
 
             return ListView.builder(
-              itemCount: items.length,
+              itemCount: cities.length,
               itemBuilder: (context, index) {
-                final city = items[index];
+                final city = cities[index];
                 return ListTile(
-                  title: Text(city['cityName']),
-                  subtitle: const Text('政令指定都市'),
+                  title: Text(city.cityName),
+                  subtitle: Text(city.bigCityFlag),
                   trailing: const Icon(Icons.navigate_next),
                   onTap: () {
                     Navigator.of(context).push<void>(
                       MaterialPageRoute(
                         builder: (context) => CityDetailPage(
-                          city: city['cityName'],
+                          city: city.cityName,
                         ),
                       ),
                     );
